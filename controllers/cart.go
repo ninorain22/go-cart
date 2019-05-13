@@ -3,7 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"cart/models"
-	)
+)
 
 type CartController struct {
 	BaseController
@@ -26,6 +26,7 @@ func (this *CartController) Incr() {
 	var i models.SkuItem
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &i); err != nil {
 		this.Data["json"] = err.Error()
+		this.StopRun()
 	}
 	cart := models.GetCart(userId, shopId)
 	cart.Incr(i.SkuId, i.SkuNum)
@@ -40,6 +41,7 @@ func (this *CartController) Decr() {
 	var i models.SkuItem
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &i); err != nil {
 		this.Data["json"] = err.Error()
+		this.StopRun()
 	}
 	cart := models.GetCart(userId, shopId)
 	cart.Decr(i.SkuId, i.SkuNum)
@@ -54,6 +56,7 @@ func (this *CartController) Drop() {
 	var i models.SkuItem
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &i); err != nil {
 		this.Data["json"] = err.Error()
+		this.StopRun()
 	}
 	cart := models.GetCart(userId, shopId)
 	cart.Drop(i.SkuId)
@@ -68,6 +71,7 @@ func (this *CartController) Set() {
 	var i models.SkuItem
 	if err := json.Unmarshal(this.Ctx.Input.RequestBody, &i); err != nil {
 		this.Data["json"] = err.Error()
+		this.StopRun()
 	}
 	cart := models.GetCart(userId, shopId)
 	cart.Drop(i.SkuId)

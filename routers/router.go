@@ -14,7 +14,7 @@ import (
 	"cart/business"
 	"cart/enumerations"
 	"github.com/astaxie/beego/validation"
-	)
+)
 
 var ValidateToken = func(ctx *context.Context) {
 	userId := ctx.Input.Query("userId")
